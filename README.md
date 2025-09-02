@@ -115,7 +115,7 @@ A modern, full-stack invoicing application built with Next.js 15, featuring mult
    XATA_DATABASE_URL=postgresql://user:password@localhost:5432/invoicing
 
    # Authentication
-   CLERK_PUBLISHABLE_KEY=your_clerk_key
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
    CLERK_SECRET_KEY=your_clerk_secret
 
    # Payments
