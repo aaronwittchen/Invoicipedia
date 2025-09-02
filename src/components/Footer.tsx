@@ -1,14 +1,14 @@
-import Container from "@/components/Container";
+import Container from '@/components/Container';
 
 const Footer = () => {
   return (
-    <footer className="mt-12 mb-8">
-      <Container className="flex justify-between gap-4">
-        <p className="text-sm">
+    <footer className='mt-12 mb-8'>
+      <Container className='flex justify-between gap-4'>
+        <p className='text-sm'>
           Invoicipedia &copy; {new Date().getFullYear()}
         </p>
-        <p className="text-sm">
-          Created by LocalOnionSeller with Next.js, Xata, and Clerk
+        <p className='text-sm'>
+          Created by Onion with Next.js, Xata, and Clerk
         </p>
       </Container>
     </footer>

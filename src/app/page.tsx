@@ -12,10 +12,10 @@ import { Button } from '@/components/ui/button';
 
 export default function Home() {
   return (
-    <main className='flex flex-col justify-center items-center min-h-screen text-center gap-6 max-w-5xl mx-auto'>
+    <main className='flex flex-col justify-center items-center text-center gap-6 max-w-5xl mx-auto'>
       <h1 className='text-5xl font-bold'>Invoicipedia</h1>
 
-      <p className='flex gap-4'>
+      <div className='flex gap-4'>
         <SignedOut>
           <SignInButton>
             <Button>Sign In</Button>
@@ -28,7 +28,7 @@ export default function Home() {
         <SignedIn>
           <UserButton />
         </SignedIn>
-      </p>
+      </div>
     </main>
   );
 }

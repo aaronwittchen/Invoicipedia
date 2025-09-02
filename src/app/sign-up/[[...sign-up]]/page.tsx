@@ -19,11 +19,11 @@ import Link from 'next/link';
 
 export default function SignUpPage() {
   return (
-    <div className='grid w-full flex-grow items-center bg-white px-4 sm:justify-center'>
+    <div className='grid w-full flex-grow items-center bg-background px-4 sm:justify-center'>
       <SignUpRoot>
         <SignUpStep
           name='start'
-          className='w-full space-y-6 rounded-2xl px-4 py-10 sm:w-96 sm:px-8'
+          className='w-full space-y-6 rounded-2xl px-4 py-10 sm:w-96 sm:px-8 bg-card shadow-lg border'
         >
           <header className='text-center'>
             <svg
@@ -35,44 +35,64 @@ export default function SignUpPage() {
               strokeLinecap='round'
               strokeLinejoin='round'
               strokeWidth='2'
-              className='mx-auto size-10'
+              className='mx-auto size-10 text-foreground'
               viewBox='0 0 24 24'
             >
               <title>Logo</title>
               <path d='M16 20V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v16' />
               <rect width='20' height='14' x='2' y='6' rx='2' />
             </svg>
-            <h1 className='mt-4 text-xl font-medium tracking-tight text-neutral-950'>
+            <h1 className='mt-4 text-xl font-medium tracking-tight text-foreground'>
               Create your Invoicipedia account
             </h1>
           </header>
-          <GlobalError className='block text-sm text-red-600' />
+
+          <GlobalError className='block text-sm text-destructive' />
+
+          {/* Email field */}
           <Field name='email'>
             <Label className='sr-only'>Email</Label>
             <Input
               type='email'
               required
               placeholder='Email'
-              className='w-full border-b border-neutral-200 bg-white pb-2 text-sm/6 text-neutral-950 outline-none placeholder:text-neutral-400 hover:border-neutral-300 focus:border-neutral-600 data-[invalid]:border-red-600 data-[invalid]:text-red-600'
+              className='w-full border-b border-border 
+                         bg-background
+                         pb-2 text-sm/6 text-foreground
+                         outline-none placeholder:text-muted-foreground
+                         hover:border-border/80
+                         focus:border-ring
+                         data-[invalid]:border-destructive data-[invalid]:text-destructive'
             />
-            <FieldError className='mt-2 block text-xs text-red-600' />
+            <FieldError className='mt-2 block text-xs text-destructive' />
           </Field>
+
+          {/* Password field */}
           <Field name='password'>
             <Label className='sr-only'>Password</Label>
             <Input
               type='password'
               required
               placeholder='Password'
-              className='w-full border-b border-neutral-200 bg-white pb-2 text-sm/6 text-neutral-950 outline-none placeholder:text-neutral-400 hover:border-neutral-300 focus:border-neutral-600 data-[invalid]:border-red-600 data-[invalid]:text-red-600'
+              className='w-full border-b border-border 
+                         bg-background
+                         pb-2 text-sm/6 text-foreground
+                         outline-none placeholder:text-muted-foreground
+                         hover:border-border/80
+                         focus:border-ring
+                         data-[invalid]:border-destructive data-[invalid]:text-destructive'
             />
-            <FieldError className='mt-2 block text-xs text-red-600' />
+            <FieldError className='mt-2 block text-xs text-destructive' />
           </Field>
+
           <SignUpAction submit asChild>
             <Button className='w-full font-bold'>Sign Up</Button>
           </SignUpAction>
+
+          {/* Alternative providers */}
           <div>
-            <p className='mb-4 text-center text-sm/5 text-neutral-500'>
-              Alternatively, sign up with these platforms
+            <p className='mb-4 text-center text-sm/5 text-muted-foreground'>
+              Alternatively, sign up with these platforms:
             </p>
             <div className='space-y-2'>
               <Connection name='github' asChild>
@@ -82,12 +102,12 @@ export default function SignUpPage() {
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 24 24'
+                    viewBox='0 0 16 16'
                     fill='currentColor'
-                    className='size-4'
+                    className='size-4 text-foreground'
                   >
                     <title>GitHub Logo</title>
-                    <path d='M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.2 22 16.448 22 12.021 22 6.484 17.523 2 12 2Z' />
+                    <path d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z' />
                   </svg>
                   Sign up with GitHub
                 </Button>
@@ -102,7 +122,7 @@ export default function SignUpPage() {
                     fill='none'
                     viewBox='0 0 16 16'
                     aria-hidden
-                    className='size-4'
+                    className='size-4 text-foreground'
                   >
                     <title>Google Logo</title>
                     <g clipPath='url(#a)'>
@@ -122,13 +142,15 @@ export default function SignUpPage() {
               </Connection>
             </div>
           </div>
-          <p className='text-center text-sm text-neutral-500'>
+
+          {/* Sign in link */}
+          <p className='text-center text-sm text-muted-foreground'>
             Already have an account?{' '}
             <Link
               href={
                 String(process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL) || '/sign-in'
               }
-              className='rounded px-1 py-0.5 text-neutral-700 outline-none hover:bg-neutral-100 focus-visible:bg-neutral-100'
+              className='rounded px-1 py-0.5 text-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground'
             >
               Sign in
             </Link>

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/Container"
+import CurrencySelector from "@/components/CurrencySelector";
 
 import { createAction } from '@/app/actions'
 import { SyntheticEvent, startTransition, useState } from "react";
@@ -40,8 +41,12 @@ export default function Home() {
           <Input id="email" name="email" type="email" />
         </div>
         <div>
+          <Label htmlFor="currency" className="block font-semibold text-sm mb-2">Currency</Label>
+          <CurrencySelector name="currency" defaultValue="usd" />
+        </div>
+        <div>
           <Label htmlFor="value" className="block font-semibold text-sm mb-2">Value</Label>
-          <Input id= "value" name="value" type="text" />
+          <Input id="value" name="value" type="text" placeholder="0.00" />
         </div>
         <div>
           <Label htmlFor="description" className="block font-semibold text-sm mb-2">Description</Label>

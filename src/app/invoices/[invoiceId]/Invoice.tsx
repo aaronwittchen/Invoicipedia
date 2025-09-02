@@ -2,10 +2,11 @@
 
 import { useOptimistic } from 'react';
 import { ChevronDown, CreditCard, Ellipsis, Trash2 } from 'lucide-react';
-import { Invoices } from '@/db/schema';
+import { Customers, Invoices } from '@/db/schema';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import Container from '@/components/Container';
+import { formatCurrency, getCurrencyDisplay, type Currency } from '@/lib/currency';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,9 +26,12 @@ import { Button } from '@/components/ui/button';
 import { AVAILABLE_STATUSES } from '@/data/invoices';
 import { updateStatusAction, deleteInvoiceAction } from '@/app/actions';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 
 interface InvoiceProps {
-  invoice: typeof Invoices.$inferSelect;
+  invoice: typeof Invoices.$inferSelect & {
+    customer: typeof Customers.$inferSelect;
+  };
 }
 
 export default function Invoice({ invoice }: InvoiceProps) {
@@ -37,6 +41,10 @@ export default function Invoice({ invoice }: InvoiceProps) {
       return String(newStatus);
     }
   );
+
+  const { theme } = useTheme();
+  const dialogClasses =
+    theme === 'dark' ? 'bg-zinc-900 text-zinc-100' : 'bg-white text-zinc-900';
 
   async function handleOnUpdateStatus(formData: FormData) {
     const originalStatus = currentStatus;
@@ -107,6 +115,15 @@ export default function Invoice({ invoice }: InvoiceProps) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem>
+                    <Link
+                      href={`/invoices/${invoice.id}/payments`}
+                      className='flex items-center gap-2'
+                    >
+                      <CreditCard className='w-4 h-auto' />
+                      Payment
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
                     <DialogTrigger asChild>
                       <button className='flex items-center gap-2' type='submit'>
                         <Trash2 className='w-4 h-auto' />
@@ -114,20 +131,10 @@ export default function Invoice({ invoice }: InvoiceProps) {
                       </button>
                     </DialogTrigger>
                   </DropdownMenuItem>
-
-                  <DropdownMenuItem>
-                    <Link
-                      href={`/invoices/${invoice.id}/payment`}
-                      className='flex items-center gap-2'
-                    >
-                      <CreditCard className='w-4 h-auto' />
-                      Payment
-                    </Link>
-                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <DialogContent className='bg-white'>
+              <DialogContent className={dialogClasses}>
                 <DialogHeader>
                   <DialogTitle className='text-2xl'>
                     Delete Invoice?
@@ -157,9 +164,14 @@ export default function Invoice({ invoice }: InvoiceProps) {
             </Dialog>
           </div>
         </div>
-        <p className='text-3xl mb-3'>${(invoice.value / 100).toFixed(2)}</p>
+        <p className='text-3xl mb-3'>
+          {formatCurrency(invoice.value, invoice.currency as Currency)}
+        </p>
+
         <p className='text-lg mb-8'>{invoice.description}</p>
-        <h2 className='font bold text-lg mb-4'>Billing Details</h2>
+
+        <h2 className='font-bold text-lg mb-4'>Billing Details</h2>
+
         <ul className='grid gap-2'>
           <li className='flex gap-4'>
             <strong className='block w-28 flex-shrink-0 font-medium text-sm'>
@@ -177,13 +189,19 @@ export default function Invoice({ invoice }: InvoiceProps) {
             <strong className='block w-28 flex-shrink-0 font-medium text-sm'>
               Billing Name
             </strong>
-            <span></span>
+            <span>{invoice.customer.name}</span>
           </li>
           <li className='flex gap-4'>
             <strong className='block w-28 flex-shrink-0 font-medium text-sm'>
               Billing Email
             </strong>
-            <span></span>
+            <span>{invoice.customer.email}</span>
+          </li>
+          <li className='flex gap-4'>
+            <strong className='block w-28 flex-shrink-0 font-medium text-sm'>
+              Currency
+            </strong>
+            <span>{getCurrencyDisplay(invoice.currency as Currency)}</span>
           </li>
         </ul>
       </Container>
