@@ -8,7 +8,7 @@
 [![Clerk](https://img.shields.io/badge/Auth-Clerk-6C47FF?logo=clerk&logoColor=white)](https://clerk.com/)
 [![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://invoicipedia-one.vercel.app/)
 
-A modern, full-stack invoicing application built with Next.js 15, featuring multi-currency support, Stripe payments, and professional email notifications.
+A modern, full-stack invoicing application built with Next.js 15, featuring multi-currency support, Stripe payments, and professional email notifications.  
 Live Page: https://invoicipedia-one.vercel.app/
 
 ![InvoiceImage](public/InvoiceImage.png)
