@@ -1,5 +1,7 @@
 # Invoicipedia - Essential Development Roadmap
 
+- Add a page icon
+
 ## Core Invoice Management
 
 - Invoice editing and duplication
