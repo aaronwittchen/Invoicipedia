@@ -10,6 +10,8 @@
 
 A modern, full-stack invoicing application built with Next.js 15, featuring multi-currency support, Stripe payments, and professional email notifications.
 
+![InvoiceImage](public/InvoiceImage.png)
+
 ## What It Does
 
 - **Invoice Management**: Create, edit, and track invoices with professional templates
